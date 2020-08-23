@@ -4,13 +4,11 @@ from datetime import datetime
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
 class TodoistMetrics:
   PRESSURE_SCORE_TABLE = { 1: 0, 2: 1, 3: 4, 4: 16 }
 
   def __init__(self):
-    self.api = todoist.TodoistAPI(os.getenv("TODOIST_API_KEY"))
+    self.api = todoist.TodoistAPI(os.getenv('TODOIST_API_KEY'))
     self.api.sync()
 
   def calculate_pressure_score(self):
@@ -27,8 +25,3 @@ class TodoistMetrics:
       return not item['due'] or dateutil.parser.isoparse(item['due']['date']) < datetime.today()
 
     return list(filter(is_active, self._items()))
-
-
-if __name__ == '__main__':
-  tm = TodoistMetrics()
-  print(tm.calculate_pressure_score())

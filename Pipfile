@@ -7,7 +7,7 @@ name = "pypi"
 todoist-python = "*"
 python-dotenv = "*"
 python-dateutil = "*"
+flask = "*"
 
 [dev-packages]
 pylint = "*"
-
