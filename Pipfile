@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 todoist-python = "*"
 python-dotenv = "*"
+python-dateutil = "*"
 
 [dev-packages]
 pylint = "*"
+
