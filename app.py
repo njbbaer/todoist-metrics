@@ -10,8 +10,8 @@ app = Flask(__name__)
 def home():
     todoist = TodoistMetrics()
     return render_template('home.html', 
-        first_priority  = todoist.count_items(priority=0),
-        second_priority = todoist.count_items(priority=1),
+        first_priority  = todoist.count_items(priority=4),
+        second_priority = todoist.count_items(priority=3),
         third_priority  = todoist.count_items(priority=2)
     )
 

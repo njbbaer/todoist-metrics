@@ -17,6 +17,12 @@ class TodoistMetrics:
 
   def _active_items(self):
     def is_active(item):
-      return not item['due'] or dateutil.parser.isoparse(item['due']['date']) < datetime.today()
+      return (
+        item['checked'] == 0 
+        and (
+          not item['due'] 
+          or dateutil.parser.isoparse(item['due']['date']) < datetime.today()
+        )
+      )
 
     return list(filter(is_active, self._items()))
