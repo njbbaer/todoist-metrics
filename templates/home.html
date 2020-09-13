@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-<h1>Todoist Metrics</h1>
-<div class="badge badge-danger">
-  <h1>{{ first_priority }}</h1>
-</div>
-<div class="badge badge-warning">
-  <h1>{{ second_priority }}</h1>
-</div>
-<div class="badge badge-primary">
-  <h1>{{ third_priority }}</h1>
+<div class="container">
+  <h1>Active Tasks</h1>
+  <div class="badge badge-danger">
+    <h1>{{ first_priority }}</h1>
+  </div>
+  <div class="badge badge-warning">
+    <h1>{{ second_priority }}</h1>
+  </div>
+  <div class="badge badge-primary">
+    <h1>{{ third_priority }}</h1>
+  </div>
 </div>
 {% endblock %}
