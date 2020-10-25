@@ -2,15 +2,23 @@
 {% block title %}Home Page{% endblock %}
 {% block content %}
 <div class="container">
-  <h1>Active Tasks</h1>
-  <div class="badge badge-danger">
-    <h1>{{ first_priority }}</h1>
-  </div>
-  <div class="badge badge-warning">
-    <h1>{{ second_priority }}</h1>
-  </div>
-  <div class="badge badge-primary">
-    <h1>{{ third_priority }}</h1>
+  <h1>Count Priority</h1>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Active Items</h5>
+      <div class="badge badge-danger" style="font-size: 2em">
+        {{ first_priority }}
+      </div>
+      <div class="badge badge-warning text-white" style="font-size: 2em">
+        {{ second_priority }}
+      </div>
+      <div class="badge badge-primary" style="font-size: 2em">
+        {{ third_priority }}
+      </div>
+      <div class="badge badge-dark" style="font-size: 2em">
+        {{ fourth_priority }}
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
