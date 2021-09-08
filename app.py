@@ -13,7 +13,7 @@ def home():
         first_priority  = tm.count_active_items(priority=4),
         second_priority = tm.count_active_items(priority=3),
         third_priority  = tm.count_active_items(priority=2),
-        fourth_priority = tm.count_active_items(priority=1,)
+        fourth_priority = tm.count_active_items(priority=1),
     )
 
 @app.route('/webhook', methods=['POST'])
