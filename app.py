@@ -10,10 +10,10 @@ app = Flask(__name__)
 def home():
     tm = TodoistMetrics()
     return render_template('home.html', 
-        first_priority  = tm.count_active_items(priority=4),
-        second_priority = tm.count_active_items(priority=3),
-        third_priority  = tm.count_active_items(priority=2),
-        fourth_priority = tm.count_active_items(priority=1),
+        first_priority  = tm.count_active_tasks(priority=4),
+        second_priority = tm.count_active_tasks(priority=3),
+        third_priority  = tm.count_active_tasks(priority=2),
+        fourth_priority = tm.count_active_tasks(priority=1),
     )
 
 @app.route('/webhook', methods=['POST'])

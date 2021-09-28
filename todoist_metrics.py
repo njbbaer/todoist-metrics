@@ -9,29 +9,29 @@ class TodoistMetrics:
     self.api = todoist.TodoistAPI(os.getenv('TODOIST_API_KEY'))
     self.api.sync()
 
-  def items(self):
-    items = self.api.state['items']
-    return [Item(item) for item in items]
+  def tasks(self):
+    tasks = self.api.state['items']
+    return [Task(task) for task in tasks]
 
-  def count_active_items(self, priority):
-    def in_criteria(item):
-      return item.has_priority(priority) and item.is_active()
+  def count_active_tasks(self, priority):
+    def in_criteria(task):
+      return task.has_priority(priority) and task.is_active()
     
-    filtered_items = list(filter(in_criteria, self.items()))
-    return len(filtered_items)
+    filtered_tasks = list(filter(in_criteria, self.tasks()))
+    return len(filtered_tasks)
 
-class Item:
-  def __init__(self, item):
-    self.item = item
+class Task:
+  def __init__(self, task):
+    self.task = task
 
   def has_priority(self, priority):
-    return self.item['priority'] == priority
+    return self.task['priority'] == priority
 
   def is_active(self):
-    return self.item['checked'] == 0 and (
-        not self.item['due'] 
+    return self.task['checked'] == 0 and (
+        not self.task['due'] 
         or self.due_date() < datetime.today()
       )
 
   def due_date(self):
-    return dateutil.parser.isoparse(self.item['due']['date'])
+    return dateutil.parser.isoparse(self.task['due']['date'])
