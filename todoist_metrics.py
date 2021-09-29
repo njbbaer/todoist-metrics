@@ -8,17 +8,23 @@ class TodoistMetrics:
   def __init__(self):
     self.api = todoist.TodoistAPI(os.getenv('TODOIST_API_KEY'))
     self.api.sync()
-
-  def tasks(self):
     tasks = self.api.state['items']
-    return [Task(task) for task in tasks]
+    self.tasks = [Task(task) for task in tasks]
 
   def count_active_tasks(self, priority):
+    return len(self.get_tasks(priority))
+
+  def get_oldest_tasks(self):
+    def oldest_sort_key(task):
+      return task.due_date() or task.date_added()
+
+    return sorted(self.get_tasks(3), key=oldest_sort_key)
+
+  def get_tasks(self, priority):
     def in_criteria(task):
       return task.has_priority(priority) and task.is_active()
     
-    filtered_tasks = list(filter(in_criteria, self.tasks()))
-    return len(filtered_tasks)
+    return list(filter(in_criteria, self.tasks))
 
 class Task:
   def __init__(self, task):
@@ -34,4 +40,10 @@ class Task:
       )
 
   def due_date(self):
-    return dateutil.parser.isoparse(self.task['due']['date'])
+    due = self.task['due']
+    if not due: return None
+    return dateutil.parser.isoparse(due['date'])
+
+  def date_added(self):
+    dt = dateutil.parser.isoparse(self.task['date_added'])
+    return dt.replace(tzinfo=None)
